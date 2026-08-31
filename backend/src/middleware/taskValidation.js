@@ -28,12 +28,6 @@ export const createTaskValidation = [
         .optional()
         .isISO8601()
         .withMessage("Due date must be a valid date"),
-    
-    body("userId")
-        .notEmpty()
-        .withMessage("User ID is required")
-        .isMongoId()
-        .withMessage("Invalid user ID")
 ];
 
 export const updateTaskValidation = [

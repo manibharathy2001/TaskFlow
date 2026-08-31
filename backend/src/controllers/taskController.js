@@ -8,8 +8,7 @@ export const createTask = async (req, res, next) => {
             description,
             status,
             priority,
-            dueDate,
-            userId
+            dueDate
         } = req.body;
 
         const task = await Task.create({
@@ -18,7 +17,7 @@ export const createTask = async (req, res, next) => {
             status,
             priority,
             dueDate,
-            user: userId,
+            user: req.user.userId, //from protect middleware
         });
 
         await task.populate("user", "name email");
@@ -38,10 +37,10 @@ export const createTask = async (req, res, next) => {
 // Get all tasks
 export const getTasks = async (req, res, next) => {
     try{
-        const { userId } = req.query;
-
-        // get filter by user
-        const filter = userId ? { user: userId } : {};
+        // filter tasks by user
+        const filter = {
+            user: req.user.userId
+        };
 
         const tasks = await Task.find(filter)
             .populate("user", "name email")
@@ -64,8 +63,11 @@ export const getTaskById = async (req, res, next) => {
     try{
         const { id } = req.params;
 
-        const task = await Task.findById(id)
-            .populate("user", "name email");
+        // MongoDB checks both task_ID and logged-in user
+        const task = await Task.findById({
+            _id: id,
+            user: req.user.userId
+        }).populate("user", "name email");
 
         if(!task){
             return res.status(404).json({
@@ -99,7 +101,10 @@ export const updateTask = async (req, res, next) => {
         } = req.body;
 
         const task = await Task.findByIdAndUpdate(
-            id,
+            {
+                _id: id,
+                user: req.user.userId
+            },
             {
                 title,
                 description,
@@ -112,16 +117,16 @@ export const updateTask = async (req, res, next) => {
                 runValidators: true
             }
         );
-
-        // populate user but only name & email
-        await task.populate("user", "name email");
-
+        
         if(!task){
             return res.status(404).json({
                 success: false,
                 message: "Task not found"
             });
         }
+        
+        // populate user but only name & email
+        await task.populate("user", "name email");
 
         res.status(200).json({
             success: true,
@@ -140,7 +145,10 @@ export const deleteTask = async (req, res, next) => {
     try{
         const { id } = req.params;
 
-        const task = await Task.findByIdAndDelete(id);
+        const task = await Task.findByIdAndDelete({
+            _id: id,
+            user: req.user.userId
+        });
 
         if(!task){
             return res.status(404).json({
