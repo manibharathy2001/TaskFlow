@@ -32,6 +32,11 @@ const taskSchema = new mongoose.Schema(
             type: Date
         },
 
+        completedAt: {
+            type: Date,
+            default: null
+        },
+
         // User relationship with Task
         user: {
             type: mongoose.Schema.Types.ObjectId,
@@ -43,6 +48,12 @@ const taskSchema = new mongoose.Schema(
         timestamps: true
     }
 );
+
+// Indexes for common task queries
+taskSchema.index({ user: 1, createdAt: -1 });
+taskSchema.index({ user: 1, status: 1, createdAt: -1 });
+taskSchema.index({ user: 1, priority: 1, createdAt: -1 });
+taskSchema.index({ user: 1, dueDate: 1 });
 
 // Create the Task model
 const Task = mongoose.model("Task", taskSchema);

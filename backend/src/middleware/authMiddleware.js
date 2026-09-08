@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
-export const protect = (req, res, next) => {
+export const protect = async (req, res, next) => {
     try{
         // Get Authorization header
         const authHeader = req.headers.authorization;
@@ -42,8 +43,29 @@ export const protect = (req, res, next) => {
             process.env.JWT_SECRET
         );
 
-        // Attach user information to request
-        req.user = decoded;
+        // Find current user from database
+        const user = await User.findById(decoded.userId)
+            .select("_id role isActive");
+
+        // User no longer exists
+        if(!user){
+            return res.status(401).json({
+                message: "User account no longer exists"
+            });
+        }
+
+        // User account has been deactivated
+        if(!user.isActive){
+            return res.status(403).json({
+                message: "User account is inactive"
+            });
+        }
+
+        // Attach current database user information
+        req.user = {
+            userId: user._id,
+            role: user.role
+        };
 
         // Continue to next middleware/controller
         next();
