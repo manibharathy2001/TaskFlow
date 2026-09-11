@@ -1,0 +1,117 @@
+.edit-task {
+  margin-top: 16px;
+}
+
+.edit-task h3 {
+  margin: 0 0 20px;
+  font-size: 20px;
+}
+
+.edit-task .form-group {
+  margin-bottom: 16px;
+}
+
+.edit-task label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.edit-task input,
+.edit-task textarea,
+.edit-task select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  background: #ffffff;
+}
+
+.edit-task input:focus,
+.edit-task textarea:focus,
+.edit-task select:focus {
+  border-color: #111827;
+}
+
+.edit-task textarea {
+  resize: vertical;
+}
+
+.edit-task-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.edit-task-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.save-task-button,
+.cancel-task-button {
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.save-task-button {
+  border: none;
+  background: #111827;
+  color: #ffffff;
+}
+
+.save-task-button:hover {
+  opacity: 0.9;
+}
+
+.cancel-task-button {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+}
+
+.cancel-task-button:hover {
+  background: #f3f4f6;
+}
+
+.save-task-button:disabled,
+.cancel-task-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.edit-task-error {
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.edit-task input:disabled,
+.edit-task textarea:disabled,
+.edit-task select:disabled {
+  cursor: not-allowed;
+  background: #f3f4f6;
+}
+
+@media (max-width: 768px) {
+  .edit-task-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .edit-task-actions {
+    flex-direction: column;
+  }
+
+  .save-task-button,
+  .cancel-task-button {
+    width: 100%;
+  }
+}

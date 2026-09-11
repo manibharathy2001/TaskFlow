@@ -1,4 +1,6 @@
 import express from "express";
+import cors from "cors";
+
 import healthRoutes from "./routes/healthRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
@@ -8,6 +10,7 @@ import errorHandler from "./middleware/errorMiddleware.js";
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 
 // Routes

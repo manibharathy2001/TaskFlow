@@ -1,0 +1,167 @@
+.task-card {
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.task-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.task-card-header h3 {
+  margin: 0;
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+
+.task-status,
+.task-priority {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.status-todo {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.status-in-progress {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.task-description {
+  margin: 14px 0 0;
+  color: #6b7280;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.task-card-details {
+  display: flex;
+  gap: 24px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.task-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-detail-label {
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.task-priority {
+  text-transform: capitalize;
+}
+
+.priority-low {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.priority-medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.priority-high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.task-card-error {
+  margin-top: 16px;
+  padding: 10px 12px;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.task-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.edit-task-button,
+.delete-task-button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.edit-task-button {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+}
+
+.edit-task-button:hover {
+  background: #f3f4f6;
+}
+
+.delete-task-button {
+  border: 1px solid #fecaca;
+  background: #ffffff;
+  color: #991b1b;
+}
+
+.delete-task-button:hover {
+  background: #fef2f2;
+}
+
+.delete-task-button:disabled,
+.edit-task-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .task-card {
+    padding: 16px;
+  }
+
+  .task-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .task-card-details {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .task-card-actions {
+    flex-direction: column;
+  }
+
+  .edit-task-button,
+  .delete-task-button {
+    width: 100%;
+  }
+}
